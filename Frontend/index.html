@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSA DNA + Phylogeny</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+  <div class="bg-grid"></div>
+
+  <header class="hero">
+    <div>
+      <p class="kicker">DNA Multiple Sequence Alignment</p>
+
+
+    </div>
+
+  </header>
+
+  <main class="grid">
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Input</h2>
+        <button class="ghost" id="loadSample">Ví dụ</button>
+      </div>
+      <div class="field">
+        <label>Upload .fasta/.fa/.fna</label>
+        <input type="file" id="fileInput" accept=".fasta,.fa,.fna,.txt" />
+      </div>
+      <div class="field">
+        <label>hoặc dán</label>
+        <textarea id="fastaText" rows="10" placeholder=">seq1\nACGT..."></textarea>
+      </div>
+
+      <div class="panel-head">
+        <h2>Phương pháp</h2>
+      </div>
+      <div class="param-grid">
+        <label>
+          Match
+          <input type="number" id="match" value="1" />
+        </label>
+        <label>
+          Mismatch
+          <input type="number" id="mismatch" value="-1" />
+        </label>
+        <label>
+          Gap
+          <input type="number" id="gap" value="-2" />
+        </label>
+        <label>
+          Tree Method
+          <select id="tree">
+            <option value="upgma">UPGMA</option>
+            <option value="nj">Neighbor-Joining</option>
+          </select>
+        </label>
+        <label>
+          Distance
+          <select id="distance">
+            <option value="p">p-distance</option>
+            <option value="jc">Jukes-Cantor</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="runBtn">Chạy</button>
+        <div class="status" id="status"></div>
+      </div>
+
+      <div class="summary" id="summary"></div>
+    </section>
+
+    <section class="panel results">
+      <div class="panel-head">
+        <h2>Kết quả</h2>
+        <div class="downloads">
+          <a id="dlAligned" class="pill" target="_blank">Aligned FASTA</a>
+          <a id="dlMatrix" class="pill" target="_blank">Distance CSV</a>
+          <a id="dlTree" class="pill" target="_blank">Cây Newick</a>
+          <a id="dlSummary" class="pill" target="_blank">Summary</a>
+        </div>
+      </div>
+
+      <div class="result-block">
+        <h3>Aligned MSA</h3>
+        <div class="msa-controls">
+          <label>
+            Color
+            <select id="colorScheme">
+              <option value="dna">DNA Classic</option>
+              <option value="mono">Monochrome</option>
+            </select>
+          </label>
+          <label>
+            Block Size
+            <input type="number" id="blockSize" min="20" max="120" value="60" />
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" id="showConsensus" checked />
+            Hiển thị consensus
+          </label>
+        </div>
+        <div id="msaLegend" class="msa-legend"></div>
+        <div id="msaView" class="msa-grid">Chưa có kết quả.</div>
+      </div>
+
+      <div class="result-block">
+        <h3>Ma trận khoảng cách</h3>
+        <div id="matrixView" class="matrix">Chưa có kết quả.</div>
+      </div>
+
+      <div class="result-block">
+        <h3>Cây phát sinh loài</h3>
+        <div id="treeView" class="tree">Chưa có kết quả.</div>
+        <div class="newick">
+          <span>Newick:</span>
+          <code id="newickText">-</code>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
